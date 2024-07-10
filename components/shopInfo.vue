@@ -115,8 +115,9 @@ export default {
             perMove: 1,
             pagination: false,
             arrows: false,
+            gap: "40px",
             breakpoints: {
-                640: {
+                767: {
                     perPage: 1,
                 },
             },
@@ -152,16 +153,18 @@ export default {
 
 <style lang="scss" scoped>
 .shop-info {
-    margin-left: 10%;
+    margin-left: 15%;
     margin-bottom: 5%;
     overflow: hidden;
 
     .shop-info-list {
-        width: 95vw;
+        width: 100%;
 
         .shop {
             background-color: #FFECBB;
+            max-width: 307px;
             width: 21vw;
+            max-height: 790px;
             height: 53vw;
             border-radius: 20px;
         }
@@ -183,8 +186,12 @@ export default {
             object-fit: cover;
             clip-path: url(#clip-path);
         }
-    }
 
+    }
+    .shop-info-list .splide__slide {
+        width: auto !important;
+        /* デフォルトのスタイルを上書き */
+    }
     .splide-container {
         margin: 3% 0;
         position: relative;
@@ -193,7 +200,7 @@ export default {
         .title {
             font-family: "Cormorant Garamond", serif;
             font-weight: 800;
-            font-size: 1.7vw;
+            font-size: 1.5vw;
             margin-right: 3%;
         }
         .select-wrapper {
@@ -207,7 +214,7 @@ export default {
                 right: 12%;
                 width: 1vw;
                 height: 1vw;
-                border: solid white;
+                border: solid #2D2D2D;
                 border-width: 0 0.15em 0.15em 0;
                 transform: translateY(-50%) rotate(45deg);
                 pointer-events: none;
@@ -217,9 +224,9 @@ export default {
                 -webkit-appearance: none;
                 -moz-appearance: none;
                 appearance: none;
-                background-color: #2D2D2D;
+                background-color: #FFDD55;
                 font-weight: 800;
-                color: #fff;
+                color: #2D2D2D;
                 font-size: 1.5vw;
                 padding-left: 12%;
                 border: none;
@@ -234,7 +241,7 @@ export default {
         }
         hr {
             height: 3px;
-            width: 68%;
+            width: 60%;
             border: none;
             background-color: #2D2D2D;
             margin-top: 1%;
@@ -243,7 +250,7 @@ export default {
             position: static;
             width: 2vw;
             height: 2vw;
-            background-color: #2D2D2D;
+            background-color: #FFDD55;
             border: none;
             font-size: 2rem;
             cursor: pointer;
@@ -256,7 +263,7 @@ export default {
                     content: "";
                     display: inline-block;
                     vertical-align: middle;
-                    color: #fff;
+                    color: #2D2D2D;
                     line-height: 1;
                     width: 45%;
                     height: 45%;
@@ -273,7 +280,7 @@ export default {
                     content: "";
                     display: inline-block;
                     vertical-align: middle;
-                    color: #fff;
+                    color: #2D2D2D;
                     line-height: 1;
                     width: 45%;
                     height: 45%;
