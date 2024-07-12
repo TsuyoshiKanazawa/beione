@@ -1,9 +1,11 @@
 <template>
     <div>
         <Top />
-        <shopInfo />
-        <shopInfo />
-        <shopInfo />
+        <Consept />
+        <Howto />
+        <ShopInfo />
+        <ShopInfo />
+        <ShopInfo />
     </div>
 </template>
 

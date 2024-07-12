@@ -12,6 +12,12 @@ export default defineNuxtConfig({
       ],
     }
   },
+  runtimeConfig: {
+    public: {
+      spaceUid: process.env.NEWT_SPACE_UID,
+      cdnApiToken: process.env.NEWT_CDN_API_TOKEN
+    }
+  },
   css: ["@/assets/styles/main.scss"],
   vite: {
     css: {

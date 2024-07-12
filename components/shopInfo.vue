@@ -14,7 +14,7 @@
             <button class="splide__arrow splide__arrow--next" @click="goNext"></button>
         </div>
         <Splide :options="options" class="shop-info-list" ref="splide">
-            <SplideSlide>
+            <SplideSlide v-for="(content, index) in newtContents.items" :key="index">
                 <div class="shop">
                     <div class="mold-container">
                         <svg width="244" height="172" viewBox="0 0 244 172" fill="none"
@@ -29,12 +29,13 @@
                                 d="M122 171.996C21.4195 171.996 0 133.493 0 86C0 38.5071 21.4195 0 122 0C222.58 0 244 38.5027 244 86C244 133.497 222.58 172 122 172V171.996Z"
                                 fill="white" />
                         </svg>
-                        <img src="/images/damy.jpg" alt="Damy" class="damy">
+                        <img :src="content.image.src" alt="Damy" class="damy">
                     </div>
-                </div>
-            </SplideSlide>
-            <SplideSlide>
-                <div class="shop">
+                    <div v-for="(day) in content.day">
+                        {{ day }}
+                    </div>
+                    <div>{{ content.name }}</div>
+                    <div>{{ content.storeDetail }}</div>
                     <div class="mold-container">
                         <svg width="244" height="172" viewBox="0 0 244 172" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -48,47 +49,10 @@
                                 d="M122 171.996C21.4195 171.996 0 133.493 0 86C0 38.5071 21.4195 0 122 0C222.58 0 244 38.5027 244 86C244 133.497 222.58 172 122 172V171.996Z"
                                 fill="white" />
                         </svg>
-                        <img src="/images/damy.jpg" alt="Damy" class="damy">
+                        <img :src="content.menuImage.src" alt="Damy" class="damy">
+                        <div>{{ content.menuName }}</div>
+                        <div>{{ content.menuDetail }}</div>
                     </div>
-                </div>
-            </SplideSlide>
-            <SplideSlide>
-                <div class="shop">
-                    <div class="mold-container">
-                        <svg width="244" height="172" viewBox="0 0 244 172" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <clipPath id="clip-path">
-                                    <path
-                                        d="M122 171.996C21.4195 171.996 0 133.493 0 86C0 38.5071 21.4195 0 122 0C222.58 0 244 38.5027 244 86C244 133.497 222.58 172 122 172V171.996Z" />
-                                </clipPath>
-                            </defs>
-                            <path
-                                d="M122 171.996C21.4195 171.996 0 133.493 0 86C0 38.5071 21.4195 0 122 0C222.58 0 244 38.5027 244 86C244 133.497 222.58 172 122 172V171.996Z"
-                                fill="white" />
-                        </svg>
-                        <img src="/images/damy.jpg" alt="Damy" class="damy">
-                    </div>
-                </div>
-            </SplideSlide>
-            <SplideSlide>
-                <div class="shop">
-
-                </div>
-            </SplideSlide>
-            <SplideSlide>
-                <div class="shop">
-
-                </div>
-            </SplideSlide>
-            <SplideSlide>
-                <div class="shop">
-
-                </div>
-            </SplideSlide>
-            <SplideSlide>
-                <div class="shop">
-
                 </div>
             </SplideSlide>
         </Splide>
@@ -97,9 +61,10 @@
 </template>
 
 <script>
-import { Splide, SplideSlide } from '@splidejs/vue-splide'
-import '@splidejs/vue-splide/css'
-import { ref } from 'vue';
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import '@splidejs/vue-splide/css';
+import { ref, onMounted } from 'vue';
+import { useNuxtApp } from '#app';
 
 export default {
     components: {
@@ -109,13 +74,13 @@ export default {
     setup() {
         const splide = ref(null);
         const options = {
-            type: "slide",
+            type: 'slide',
             rewind: true,
             perPage: 4,
             perMove: 1,
             pagination: false,
             arrows: false,
-            gap: "40px",
+            gap: '40px',
             breakpoints: {
                 767: {
                     perPage: 1,
@@ -127,6 +92,7 @@ export default {
                 next: 'splide__arrow--next',
             },
         };
+
         const goPrev = () => {
             splide.value.go('<');
         };
@@ -134,21 +100,25 @@ export default {
         const goNext = () => {
             splide.value.go('>');
         };
-        return { options, splide, goPrev, goNext };
-    },
-    mounted() {
-        const selectElement = document.getElementById('select');
 
-        selectElement.addEventListener('click', () => {
-            selectElement.parentElement.classList.toggle('dropdown-open');
+        const newtContents = ref([]);
+
+        onMounted(async () => {
+            const { $newtClient } = useNuxtApp();
+            const response = await $newtClient.getContents({
+                appUid: 'landingPage',
+                modelUid: 'vendor',
+                query: {
+                    select: ['image', 'day', 'name', 'storeDetail', 'menuImage', 'menuName', 'menuDetail']
+                }
+            });
+            newtContents.value = response;
+            console.log(newtContents.value.items[0].image.src)
         });
 
-        selectElement.addEventListener('blur', () => {
-            selectElement.parentElement.classList.remove('dropdown-open');
-        });
-    },
+        return { options, splide, goPrev, goNext, newtContents };
+    }
 };
-
 </script>
 
 <style lang="scss" scoped>

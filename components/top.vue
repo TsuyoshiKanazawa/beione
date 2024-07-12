@@ -31,7 +31,7 @@
 .top {
     position: relative;
     overflow: hidden;
-    padding-top: 180px;
+    padding-top: 200px;
     font-family: "Noto Sans JP", sans-serif;
 
     .top-visual {

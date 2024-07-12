@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header :class="{ 'header-hidden': isHeaderHidden }">
         <div class="logo">
             <img src="/images/hd-logo.svg" alt="">
         </div>
@@ -14,6 +14,36 @@
     </header>
 </template>
 
+<script>
+export default {
+    data() {
+        return {
+            isHeaderHidden: false,
+            lastScrollY: 0
+        };
+    },
+    mounted() {
+        window.addEventListener('scroll', this.handleScroll);
+    },
+    beforeDestroy() {
+        window.removeEventListener('scroll', this.handleScroll);
+    },
+    methods: {
+        handleScroll() {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > this.lastScrollY) {
+                // 下にスクロール
+                this.isHeaderHidden = true;
+            } else {
+                // 上にスクロール
+                this.isHeaderHidden = false;
+            }
+            this.lastScrollY = currentScrollY;
+        }
+    }
+};
+</script>
+
 <style lang="scss" scoped>
 header {
     max-width: 1138px;
@@ -27,11 +57,11 @@ header {
     z-index: 1000;
     border-radius: 40px;
     color: white;
-    font-family: "Noto Sans JP", sans-serif;
     display: flex;
     justify-content: flex-start;
     padding-left: 4%;
     box-sizing: border-box;
+    transition: transform 0.3s ease, opacity 0.5s ease;
     .logo {
         height: fit-content;
         margin: auto 0;
@@ -54,7 +84,11 @@ header {
         }
     }
 }
-    @media screen and (max-width: 767px) {
-        
-    }
+.header-hidden {
+    transform: translate(-50%, -200%) !important;
+    opacity: 0;
+}
+@media screen and (max-width: 767px) {
+    
+}
 </style>
