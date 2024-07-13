@@ -1,11 +1,11 @@
 <template>
     <div class="top">
         <div class="top-visual">
-            <img src="/images/logo.svg" alt="logo" class="logo">
+            <img src="/images/logo.svg" alt="logo" class="logo" ref="logo">
             <div style="width: fit-content;">
-                <img src="/images/title.svg" alt="title" class="top-title">
-                <img src="/images/jaShimane.svg" alt="sponsorship" class="ja-shimane">
-                <div class="top-overview">
+                <img src="/images/title.svg" alt="title" class="top-title" ref="title">
+                <img src="/images/jaShimane.svg" alt="sponsorship" class="ja-shimane" ref="ja">
+                <div class="top-overview" ref="overview">
                     <div class="section">
                         <div class="subject">〈開催日時〉</div>
                         <div class="text">
@@ -27,10 +27,42 @@
     </div>
 </template>
 
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+
+const logo = ref(null);
+const title = ref(null);
+const ja = ref(null);
+const overview = ref(null);
+
+onMounted(() => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('inview');
+            }
+        });
+    });
+
+    if (logo.value) {
+        observer.observe(logo.value);
+    }
+    if (title.value) {
+        observer.observe(title.value);
+    }
+    if (ja.value) {
+        observer.observe(ja.value);
+    }
+    if (overview.value) {
+        observer.observe(overview.value);
+    }
+});
+</script>
+
 <style lang="scss" scoped>
 .top {
     position: relative;
-    overflow: hidden;
+
     padding-top: 200px;
     font-family: "Noto Sans JP", sans-serif;
 
@@ -42,12 +74,27 @@
         .logo {
             max-width: 603px;
             width: 45vw;
+            opacity: 0;
+            transition: 0.8s;
+            transform: translateY(50px);
+            &.inview {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .top-title {
             max-width: 488px;
             width: 37vw;
             margin: -2% 0 0 0;
+            opacity: 0;
+            transition: 0.8s;
+            transform: translateY(50px);
+            transition-delay: 0.2s;
+            &.inview {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .ja-shimane {
@@ -55,6 +102,14 @@
             width: 27vw;
             display: block;
             margin-top: 3%;
+            opacity: 0;
+            transition: 0.8s;
+            transform: translateY(50px);
+            transition-delay: 0.4s;
+            &.inview {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     }
 
@@ -76,6 +131,14 @@
                 font-size: clamp(8px, 2.2vw, 29px);
                 font-weight: 900;
             }
+        }
+        opacity: 0;
+        transition: 0.8s;
+        transform: translateY(50px);
+        transition-delay: 0.6s;
+        &.inview {
+            opacity: 1;
+            transform: translateY(0);
         }
     }
 }

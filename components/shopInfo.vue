@@ -1,69 +1,57 @@
 <template>
     <div class="shop-info">
-        <div class="splide-container">
+        <svg width="0" height="0">
+            <defs>
+                <clipPath id="clip-path" clipPathUnits="objectBoundingBox">
+                    <path d="M0.5 1 C0.1 1 0 0.75 0 0.5 C0 0.25 0.1 0 0.5 0 C0.9 0 1 0.25 1 0.5 C1 0.75 0.9 1 0.5 1" />
+                </clipPath>
+            </defs>
+        </svg>
+        <div class="splide-container" ref="select">
             <div class="title">Shop Info</div>
-            <div class="select-wrapper">
-                <select name="select" id="select">
+            <div class="select-wrapper" ref="selectWrapper" :data-open="isFocused">
+                <select name="select" id="select" v-model="selectedDay" @click="onClick" @blur="onBlur">
                     <option value="全日">全日</option>
-                    <option value="9/7(土)">9/7(土)</option>
-                    <option value="9/8(日)">9/8(日)</option>
+                    <option value="9/7(土)">土曜日</option>
+                    <option value="9/8(日)">日曜日</option>
                 </select>
+                <img src="/images/selectArrow.svg" alt="arrow" class="selectArrow">
             </div>
             <hr />
             <button class="splide__arrow splide__arrow--prev" @click="goPrev"></button>
             <button class="splide__arrow splide__arrow--next" @click="goNext"></button>
         </div>
         <Splide :options="options" class="shop-info-list" ref="splide">
-            <SplideSlide v-for="(content, index) in newtContents.items" :key="index">
+            <SplideSlide v-for="(content, index) in filteredContents" :key="index">
                 <div class="shop">
-                    <div class="mold-container">
-                        <svg width="244" height="172" viewBox="0 0 244 172" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <clipPath id="clip-path">
-                                    <path
-                                        d="M122 171.996C21.4195 171.996 0 133.493 0 86C0 38.5071 21.4195 0 122 0C222.58 0 244 38.5027 244 86C244 133.497 222.58 172 122 172V171.996Z" />
-                                </clipPath>
-                            </defs>
-                            <path
-                                d="M122 171.996C21.4195 171.996 0 133.493 0 86C0 38.5071 21.4195 0 122 0C222.58 0 244 38.5027 244 86C244 133.497 222.58 172 122 172V171.996Z"
-                                fill="white" />
-                        </svg>
-                        <img :src="content.image.src" alt="Damy" class="damy">
+                    <svg width="100%" height="25%" viewBox="0 0 350 250" style="margin: auto; display: block;">
+                        <image :href="content.image.src" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
+                            clip-path="url(#clip-path)" />
+                    </svg>
+                    <div class="day-container">
+                        <div v-for="(day) in content.day" :key="day" class="day" :class="getClassForDay(day)">
+                            {{ day }}
+                        </div>
                     </div>
-                    <div v-for="(day) in content.day">
-                        {{ day }}
-                    </div>
-                    <div>{{ content.name }}</div>
-                    <div>{{ content.storeDetail }}</div>
-                    <div class="mold-container">
-                        <svg width="244" height="172" viewBox="0 0 244 172" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <clipPath id="clip-path">
-                                    <path
-                                        d="M122 171.996C21.4195 171.996 0 133.493 0 86C0 38.5071 21.4195 0 122 0C222.58 0 244 38.5027 244 86C244 133.497 222.58 172 122 172V171.996Z" />
-                                </clipPath>
-                            </defs>
-                            <path
-                                d="M122 171.996C21.4195 171.996 0 133.493 0 86C0 38.5071 21.4195 0 122 0C222.58 0 244 38.5027 244 86C244 133.497 222.58 172 122 172V171.996Z"
-                                fill="white" />
-                        </svg>
-                        <img :src="content.menuImage.src" alt="Damy" class="damy">
-                        <div>{{ content.menuName }}</div>
-                        <div>{{ content.menuDetail }}</div>
-                    </div>
+                    <div class="name">{{ content.name }}</div>
+                    <div class="detail">{{ content.storeDetail }}</div>
+                    <svg width="100%" height="25%" viewBox="0 0 350 250" style="margin: auto; display: block;">
+                        <image :href="content.menuImage.src" width="100%" height="100%"
+                            preserveAspectRatio="xMidYMid slice" clip-path="url(#clip-path)" />
+                    </svg>
+                    <div class="name">{{ content.menuName }}</div>
+                    <div class="detail">{{ content.menuDetail }}</div>
                 </div>
             </SplideSlide>
+            <SplideSlide></SplideSlide>
         </Splide>
     </div>
-
 </template>
 
 <script>
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import '@splidejs/vue-splide/css';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useNuxtApp } from '#app';
 
 export default {
@@ -72,7 +60,26 @@ export default {
         SplideSlide
     },
     setup() {
+        const addInviewClass = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('inview');
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(addInviewClass);
+
+        onMounted(() => {
+            const elementsToObserve = document.querySelectorAll('.splide-container, .shop-info-list');
+            elementsToObserve.forEach(el => observer.observe(el));
+        });
+
+
         const splide = ref(null);
+        const selectedDay = ref('全日');
+        const isFocused = ref(false);
+
         const options = {
             type: 'slide',
             rewind: true,
@@ -102,7 +109,6 @@ export default {
         };
 
         const newtContents = ref([]);
-
         onMounted(async () => {
             const { $newtClient } = useNuxtApp();
             const response = await $newtClient.getContents({
@@ -116,7 +122,52 @@ export default {
             console.log(newtContents.value.items[0].image.src)
         });
 
-        return { options, splide, goPrev, goNext, newtContents };
+        const filteredContents = computed(() => {
+            if (selectedDay.value === '全日') {
+                return newtContents.value.items;
+            }
+            return newtContents.value.items.filter((content) =>
+                content.day.includes(selectedDay.value)
+            );
+        });
+
+        const getClassForDay = (day) => {
+            if (day.includes('9/7(土)')) {
+                return 'saturday';
+            } else if (day.includes('9/8(日)')) {
+                return 'sunday';
+            }
+            return '';
+        };
+
+        const onClick = () => {
+            if (isFocused.value) {
+                isFocused.value = false;
+                return
+            } else {
+                console.log(isFocused.value)
+                isFocused.value = true;
+                return
+            }
+        };
+
+        const onBlur = () => {
+            isFocused.value = false;
+        };
+
+        return {
+            options,
+            splide,
+            goPrev,
+            goNext,
+            newtContents,
+            getClassForDay,
+            filteredContents,
+            selectedDay,
+            isFocused,
+            onBlur,
+            onClick
+        };
     }
 };
 </script>
@@ -126,6 +177,149 @@ export default {
     margin-left: 15%;
     margin-bottom: 5%;
     overflow: hidden;
+    .splide-container {
+        margin: 3% 0;
+        position: relative;
+        display: flex;
+        gap: 1%;
+
+        .title {
+            font-family: "Roboto", sans-serif;
+            font-weight: 700;
+            font-size: 1.5vw;
+            font-size: clamp(14px, 1.5vw, 20px);
+            margin-right: 1%;
+            line-height: 1.5;
+        }
+
+        .select-wrapper {
+            position: relative;
+            transition: 0.2s;
+            max-height: 29px;
+
+            &[data-open="true"] select {
+                background-color: #2D2D2D;
+                color: #fff;
+            }
+
+            &[data-open="true"] {
+                .selectArrow {
+                    filter: brightness(10);
+                }
+            }
+
+            &:hover {
+                .selectArrow {
+                    filter: brightness(10);
+                }
+            }
+
+            &:hover select {
+                background-color: #2D2D2D;
+                color: #fff;
+            }
+
+            .selectArrow {
+                position: absolute;
+                top: 0;
+                right: 9%;
+                margin-top: 8%;
+                pointer-events: none;
+                transition: 0.2s;
+                width: 20%;
+            }
+
+            & select {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                font-family: "Noto Sans JP", sans-serif;
+                background-color: #FFDD55;
+                font-weight: 800;
+                color: #2D2D2D;
+                font-size: clamp(14px, 1.5vw, 20px);
+                padding-left: 12%;
+                padding-right: 0;
+                border: none;
+                border-radius: 70px;
+                width: 8vw;
+                max-width: 110px;
+                min-width: 94px;
+                min-height: 24px;
+                transition: 0.2s;
+            }
+        }
+
+        hr {
+            height: 0.15vw;
+            width: 60%;
+            border: none;
+            background-color: #2D2D2D;
+            margin: auto 0;
+        }
+
+        .splide__arrow {
+            position: static;
+            width: 2vw;
+            height: 2vw;
+            max-width: 29px;
+            max-height: 29px;
+            min-width: 24px;
+            min-height: 24px;
+            background-color: #FFDD55;
+            border: none;
+            font-size: 1vw;
+            cursor: pointer;
+            z-index: 1;
+            opacity: 1;
+            transform: none;
+            transition: background-color 0.2s, color 0.2s;
+
+            &.splide__arrow--prev::after,
+            &.splide__arrow--next::after {
+                content: "";
+                display: inline-block;
+                vertical-align: middle;
+                color: #2D2D2D;
+                line-height: 1;
+                width: 45%;
+                height: 45%;
+                border: 0.2vw solid currentColor;
+                box-sizing: border-box;
+            }
+
+            &.splide__arrow--prev::after {
+                border-right: 0;
+                border-bottom: 0;
+                transform: translateX(25%) rotate(-45deg);
+                transition: 0.2s;
+            }
+
+            &.splide__arrow--next::after {
+                border-left: 0;
+                border-bottom: 0;
+                transform: translateX(-25%) rotate(45deg);
+                transition: 0.2s;
+            }
+
+            &:hover {
+                background-color: #2D2D2D;
+
+                &.splide__arrow--prev::after,
+                &.splide__arrow--next::after {
+                    color: #fff;
+                }
+            }
+        }
+        opacity: 0;
+        transition: 0.6s;
+        transform: translateY(50px);
+        transition-delay: 0.2s;
+        &.inview {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
     .shop-info-list {
         width: 100%;
@@ -133,135 +327,66 @@ export default {
         .shop {
             background-color: #FFECBB;
             max-width: 307px;
+            min-width: 252px;
             width: 21vw;
             max-height: 790px;
+            min-height: 630px;
             height: 53vw;
             border-radius: 20px;
-        }
-        .mold-container {
-            position: relative;
-            display: inline-block;
+            padding: 7%;
+            box-sizing: border-box;
         }
 
-        .mold-container img.mold {
-            display: block;
+        .day-container {
+            display: flex;
+            justify-content: center;
+            gap: 5%;
+            font-size: clamp(8px, 0.9vw, 10px);
+            text-align: center;
+            line-height: clamp(15px, 1vw, 19px);
+            margin: 4% 0 3%;
+            font-weight: 700;
+            .day {
+                width: 5vw;
+                max-width: 71px;
+                min-width: 60px;
+                height: 1.4vw;
+                max-height: 19px;
+                min-height: 15px;
+                border-radius: 23px;
+            }
+            .saturday {
+                background-color: #4D7DB5;
+            }
+            .sunday {
+                background-color: #DE5151;
+            }
         }
-
-        .mold-container img.damy {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            clip-path: url(#clip-path);
+        .name {
+            font-size: clamp(18px, 1.6vw, 24px);
+            font-family: "M PLUS Rounded 1c", sans-serif;
+            font-weight: 800;
         }
-
+        .detail {
+            font-size: clamp(9px, 0.8vw, 12px);
+            font-family: "M PLUS Rounded 1c", sans-serif;
+            font-weight: 400;
+            margin-bottom: 7%;
+            height: 133px;
+            overflow: hidden;
+        }
+        opacity: 0;
+        transition: 0.6s;
+        transform: translateY(50px);
+        transition-delay: 0.2s;
+        &.inview {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
+
     .shop-info-list .splide__slide {
         width: auto !important;
-        /* デフォルトのスタイルを上書き */
-    }
-    .splide-container {
-        margin: 3% 0;
-        position: relative;
-        display: flex;
-        gap: 1%;
-        .title {
-            font-family: "Cormorant Garamond", serif;
-            font-weight: 800;
-            font-size: 1.5vw;
-            margin-right: 3%;
-        }
-        .select-wrapper {
-            position: relative;
-            display: inline-block;
-            width: 9.5vw;
-            &::after {
-                content: '';
-                position: absolute;
-                top: 35%;
-                right: 12%;
-                width: 1vw;
-                height: 1vw;
-                border: solid #2D2D2D;
-                border-width: 0 0.15em 0.15em 0;
-                transform: translateY(-50%) rotate(45deg);
-                pointer-events: none;
-                transition: 0.2s;
-            }
-            & select {
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                appearance: none;
-                background-color: #FFDD55;
-                font-weight: 800;
-                color: #2D2D2D;
-                font-size: 1.5vw;
-                padding-left: 12%;
-                border: none;
-                border-radius: 70px;
-                width: 100%;
-                padding-right: 2em;
-            }
-            &.dropdown-open::after {
-                transition: 0.2s;
-                transform: translateY(0%) rotate(225deg);
-            }
-        }
-        hr {
-            height: 3px;
-            width: 60%;
-            border: none;
-            background-color: #2D2D2D;
-            margin-top: 1%;
-        }
-        .splide__arrow {
-            position: static;
-            width: 2vw;
-            height: 2vw;
-            background-color: #FFDD55;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 1;
-            opacity: 1;
-            transform: none;
-
-            &--prev {
-                &::after {
-                    content: "";
-                    display: inline-block;
-                    vertical-align: middle;
-                    color: #2D2D2D;
-                    line-height: 1;
-                    width: 45%;
-                    height: 45%;
-                    border: 0.2rem solid currentColor;
-                    border-right: 0;
-                    border-bottom: 0;
-                    box-sizing: border-box;
-                    transform: translateX(25%) rotate(-45deg);
-                }
-            }
-
-            &--next {
-                &::after {
-                    content: "";
-                    display: inline-block;
-                    vertical-align: middle;
-                    color: #2D2D2D;
-                    line-height: 1;
-                    width: 45%;
-                    height: 45%;
-                    border: 0.2rem solid currentColor;
-                    border-left: 0;
-                    border-bottom: 0;
-                    box-sizing: border-box;
-                    transform: translateX(-25%) rotate(45deg);
-                }
-            }
-        }
     }
 }
 </style>

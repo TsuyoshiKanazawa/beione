@@ -6,6 +6,9 @@
         <ShopInfo />
         <ShopInfo />
         <ShopInfo />
+        <Ambassador />
+        <Access />
+        <Question />
     </div>
 </template>
 
