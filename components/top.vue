@@ -14,7 +14,7 @@
                     </div>
                     <div class="section">
                         <div class="subject">〈開催場所〉</div>
-                        <div class="text">松江市総合体育館 駐車場</div>
+                        <div class="text">松江市総合体育館 第一駐車場</div>
                     </div>
                     <div class="section">
                         <div class="subject">〈入場料〉</div>

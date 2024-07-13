@@ -1,15 +1,15 @@
 <template>
     <header :class="{ 'header-hidden': isHeaderHidden }">
-        <div class="logo">
-            <img src="/images/hd-logo.svg" alt="">
+        <div class="logo" @click="scrollTo('top')">
+            <img src="/images/hd-logo.svg" alt="logo">
         </div>
         <ul>
-            <li>開催概要</li>
-            <li>コンセプト</li>
-            <li>出店者</li>
-            <li>ステージ</li>
-            <li>アクセス</li>
-            <li>IZUMO OROCHI FES 2024 IN MATSUE</li>
+            <li @click="scrollTo('top')">開催概要</li>
+            <li @click="scrollTo('consept')">コンセプト</li>
+            <li @click="scrollTo('shopInfo')">出店者</li>
+            <li @click="scrollTo('stageInfo')">ステージ</li>
+            <li @click="scrollTo('access')">アクセス</li>
+            <a href="https://birdman.tokyo/" target="_blank">IZUMO OROCHI FES 2024 IN MATSUE</a>
         </ul>
     </header>
 </template>
@@ -39,6 +39,15 @@ export default {
                 this.isHeaderHidden = false;
             }
             this.lastScrollY = currentScrollY;
+        },
+        scrollTo(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                window.scrollTo({
+                    top: element.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
         }
     }
 };
@@ -65,6 +74,7 @@ header {
     .logo {
         height: fit-content;
         margin: auto 0;
+        cursor: pointer;
         img {
             display: block;
             margin: auto;
@@ -81,6 +91,23 @@ header {
             height: 30px;
             display: block;
             margin: auto;
+            cursor: pointer;
+            transition: 0.2s;
+            &:hover {
+                color: #FFDD55;
+            }
+        }
+        a {
+            height: 30px;
+            display: block;
+            margin: auto;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #fff;
+            text-decoration: none;
+            &:hover {
+                color: #FFDD55;
+            }
         }
     }
 }

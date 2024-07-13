@@ -126,6 +126,7 @@ onMounted(() => {
         transition: 0.6s;
         transform: translateY(50px);
         transition-delay: 0.2s;
+        border-radius: 20px;
         &.inview {
             opacity: 1;
             transform: translateY(0);

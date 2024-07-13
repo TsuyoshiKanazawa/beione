@@ -8,7 +8,7 @@
             </defs>
         </svg>
         <div class="splide-container" ref="select">
-            <div class="title">Shop Info</div>
+            <div class="title">Booth Info</div>
             <div class="select-wrapper" ref="selectWrapper" :data-open="isFocused">
                 <select name="select" id="select" v-model="selectedDay" @click="onClick" @blur="onBlur">
                     <option value="全日">全日</option>
@@ -24,23 +24,18 @@
         <Splide :options="options" class="shop-info-list" ref="splide">
             <SplideSlide v-for="(content, index) in filteredContents" :key="index">
                 <div class="shop">
-                    <svg width="100%" height="24%" viewBox="0 0 350 250" style="margin: auto; display: block;">
+                    <svg width="100%" height="48%" viewBox="0 0 350 250" style="margin: auto; display: block;">
                         <image :href="content.image.src" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
                             clip-path="url(#clip-path)" />
                     </svg>
                     <div class="day-container">
-                        <div v-for="(day) in content.day" :key="day" class="day" :class="getClassForDay(day)">
-                            {{ day }}
+                        <div v-for="(schedule) in content.schedule" :key="index" class="day"
+                            :class="getClassForDay(schedule.data.day)">
+                            {{ schedule.data.day }}{{ schedule.data.start }}～{{ schedule.data.end }}
                         </div>
                     </div>
                     <div class="name">{{ content.name }}</div>
-                    <div class="detail">{{ content.storeDetail }}</div>
-                    <svg width="100%" height="24%" viewBox="0 0 350 250" style="margin: auto; display: block;">
-                        <image :href="content.menuImage.src" width="100%" height="100%"
-                            preserveAspectRatio="xMidYMid slice" clip-path="url(#clip-path)" />
-                    </svg>
-                    <div class="name">{{ content.menuName }}</div>
-                    <div class="detail">{{ content.menuDetail }}</div>
+                    <div class="detail">{{ content.boothDetail }}</div>
                 </div>
             </SplideSlide>
             <SplideSlide></SplideSlide>
@@ -113,13 +108,13 @@ export default {
             const { $newtClient } = useNuxtApp();
             const response = await $newtClient.getContents({
                 appUid: 'landingPage',
-                modelUid: 'vendor',
+                modelUid: 'booth',
                 query: {
-                    select: ['image', 'day', 'name', 'storeDetail', 'menuImage', 'menuName', 'menuDetail']
+                    select: ['image', 'schedule', 'name', 'boothDetail']
                 }
             });
             newtContents.value = response;
-            //console.log(newtContents.value.items[0].image.src)
+            //console.log(newtContents.value)
         });
 
         const filteredContents = computed(() => {
@@ -127,7 +122,9 @@ export default {
                 return newtContents.value.items;
             }
             return newtContents.value.items.filter((content) =>
-                content.day.includes(selectedDay.value)
+                content.schedule.some((schedule) =>
+                    schedule.data.day.includes(selectedDay.value)
+                )
             );
         });
 
@@ -145,7 +142,7 @@ export default {
                 isFocused.value = false;
                 return
             } else {
-                console.log(isFocused.value)
+                //console.log(isFocused.value)
                 isFocused.value = true;
                 return
             }
@@ -175,7 +172,7 @@ export default {
 <style lang="scss" scoped>
 .shop-info {
     margin-left: 15%;
-    margin-bottom: 1%;
+    margin-bottom: 5%;
     overflow: hidden;
     .splide-container {
         margin: 3% 0;
@@ -234,7 +231,7 @@ export default {
                 -moz-appearance: none;
                 appearance: none;
                 font-family: "Noto Sans JP", sans-serif;
-                background-color: #FFDD55;
+                background-color: #91908A;
                 font-weight: 800;
                 color: #2D2D2D;
                 font-size: clamp(14px, 1.5vw, 20px);
@@ -267,7 +264,7 @@ export default {
             max-height: 29px;
             min-width: 24px;
             min-height: 24px;
-            background-color: #FFDD55;
+            background-color: #91908A;
             border: none;
             font-size: 1vw;
             cursor: pointer;
@@ -326,13 +323,13 @@ export default {
         width: 100%;
 
         .shop {
-            background-color: #FFECBB;
+            background-color: #B9B8B8;
             max-width: 307px;
             min-width: 252px;
             width: 21vw;
-            max-height: 790px;
-            min-height: 630px;
-            height: 53vw;
+            max-height: 419px;
+            min-height: 334px;
+            height: 28vw;
             border-radius: 20px;
             padding: 7%;
             box-sizing: border-box;
@@ -341,20 +338,21 @@ export default {
         .day-container {
             display: flex;
             justify-content: center;
-            gap: 5%;
-            font-size: clamp(8px, 0.9vw, 10px);
+            gap: 3%;
+            font-size: clamp(8px, 0.8vw, 10px);
             text-align: center;
             line-height: clamp(15px, 1vw, 19px);
             margin: 4% 0 3%;
             font-weight: 700;
             .day {
-                width: 5vw;
-                max-width: 71px;
-                min-width: 60px;
+                width: 10vw;
+                max-width: 131px;
+                min-width: 100px;
                 height: 1.4vw;
                 max-height: 19px;
                 min-height: 15px;
                 border-radius: 23px;
+                line-height: clamp(15px, 1.4vw, 19px);;
             }
             .saturday {
                 background-color: #4D7DB5;
@@ -367,6 +365,7 @@ export default {
             font-size: clamp(18px, 1.6vw, 24px);
             font-family: "M PLUS Rounded 1c", sans-serif;
             font-weight: 800;
+            color: #fff;
         }
         .detail {
             font-size: clamp(9px, 0.8vw, 12px);
@@ -375,6 +374,7 @@ export default {
             margin-bottom: 7%;
             height: 133px;
             overflow: hidden;
+            color: #fff;
         }
         opacity: 0;
         transition: 0.6s;
