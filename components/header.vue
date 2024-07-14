@@ -9,7 +9,7 @@
             <li @click="scrollTo('shopInfo')">出店者</li>
             <li @click="scrollTo('stageInfo')">ステージ</li>
             <li @click="scrollTo('access')">アクセス</li>
-            <a href="https://birdman.tokyo/" target="_blank">IZUMO OROCHI FES 2024 IN MATSUE</a>
+            <a href="https://izumoorochifes.jp/" target="_blank">IZUMO OROCHI FES 2024 IN MATSUE</a>
         </ul>
     </header>
 </template>
