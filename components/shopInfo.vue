@@ -88,6 +88,7 @@ export default {
             pagination: false,
             arrows: false,
             gap: '40px',
+            speed: 600,
             breakpoints: {
                 767: {
                     perPage: 1,

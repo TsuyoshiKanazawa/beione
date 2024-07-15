@@ -62,15 +62,17 @@ onMounted(() => {
 <style lang="scss" scoped>
 .top {
     position: relative;
-
-    padding-top: 200px;
     font-family: "Noto Sans JP", sans-serif;
-
+    position: relative;
+    height: 100vh;
     .top-visual {
         display: flex;
         justify-content: center;
         gap: 2%;
-
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -40%);
         .logo {
             max-width: 603px;
             width: 45vw;

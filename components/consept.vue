@@ -58,7 +58,7 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     gap: 3%;
-    margin-top: 10%;
+    margin-top: 5%;
     .text-container {
         font-weight: 700;
         .title {
