@@ -2,10 +2,10 @@
     <div class="question-container">
         <div class="title_e">Question</div>
         <div class="title_j">よくある質問</div>
-        <div v-for="(item, index) in questions" :key="index" class="accordion" @click="toggle(index)"
+        <div v-for="(item, index) in questions" :key="index" class="accordion" :style="{ maxHeight: item.show ? contentHeights[index] : '60px' }" @click="toggle(index)"
             :class="{ inview: item.inView }" ref="accordion">
             <div class="heading">{{ item.question }}</div>
-            <div v-if="item.show" class="text">{{ item.answer }}</div>
+            <div class="text" ref="content" :class="{ 'text-visible': item.show }">{{ item.answer }}</div>
             <img :class="{ 'arrow': true, 'arrow-rotated': item.show }" src="/images/accordionArrow.svg" alt="arrow" />
         </div>
     </div>
@@ -25,11 +25,13 @@ export default {
                 { question: 'お酒やソフトドリンクなどの飲みものも販売していますか？', answer: 'オフィシャルバーにてお酒・ソフトドリンクは販売しております。未成年による飲酒、及び飲酒運転は固くお断りいたします。なお、自転車も車両の一種（軽車両）ですので、ルールをお守りください。', show: false, inView: false },
                 { question: '食事ができるところ、休憩できるところはありますか？', answer: 'テーブルや椅子の他、レジャーシートを敷いてお食事していただけるスペースをご用意しております。', show: false, inView: false }
             ],
-            accordions: ref([])
+            accordions: ref([]),
+            contentHeights: []
         };
     },
     mounted() {
         this.createObserver();
+        this.calculateContentHeights();
     },
     methods: {
         toggle(index) {
@@ -58,6 +60,14 @@ export default {
                     }
                 }
             });
+        },
+        calculateContentHeights() {
+            nextTick(() => {
+                this.$refs.accordion.forEach((accordion, index) => {
+                    const content = accordion.querySelector('.text');
+                    this.contentHeights[index] = (content.scrollHeight + 60) + 'px';
+                });
+            });
         }
     }
 };
@@ -85,8 +95,9 @@ export default {
         margin-top: 2%;
         border-radius: 40px;
         padding: 1% 5%;
-        transition: background-color 0.2s, color 0.2s, transform 0.6s;
+        transition: max-height 0.2s ease-out, background-color 0.2s, color 0.2s, transform 0.6s;
         position: relative;
+        box-sizing: border-box;
         cursor: pointer;
         .heading {
             font-size: clamp(22px, 1.8vw, 28px);
@@ -95,6 +106,10 @@ export default {
         .text {
             font-size: clamp(12px, 1vw, 17px);
             padding-right: 2%;
+            visibility: hidden;
+            &.text-visible {
+                visibility: visible;
+            }
         }
         &:hover {
             background-color: #2D2D2D;
