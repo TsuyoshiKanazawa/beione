@@ -78,6 +78,7 @@ export default {
         const options = {
             type: 'slide',
             rewind: true,
+            perPage: 4,
             perMove: 1,
             pagination: false,
             arrows: false,
