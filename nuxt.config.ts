@@ -27,5 +27,8 @@ export default defineNuxtConfig({
         },
       },
     }
-  }
+  },
+  plugins: [
+    { src: '~/plugins/google-analytics.client.js', mode: 'client' }
+  ],
 })
