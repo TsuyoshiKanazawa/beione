@@ -4,7 +4,7 @@
             <img src="/images/logo.svg" alt="logo" class="logo" ref="logo">
             <div style="width: fit-content;">
                 <img src="/images/title.svg" alt="title" class="top-title" ref="title">
-                <img src="/images/jaShimane.svg" alt="sponsorship" class="ja-shimane" ref="ja">
+                <img src="/images/jaShimane1.svg" alt="sponsorship" class="ja-shimane" ref="ja">
                 <div class="top-overview" ref="overview">
                     <div class="section">
                         <div class="subject">〈開催日時〉</div>

@@ -150,7 +150,6 @@ onMounted(() => {
                 box-sizing: border-box;
                 .large {
                     font-size: clamp(18px, 2.3vw, 36px);
-                    margin-top: 2%;
                 }
             }
             .exp {

@@ -17,7 +17,7 @@
                 その素晴らしさを地方から日本に広げていこう！
             </div>
         </div>
-        <img src="/images/consept.png" alt="consept image" ref="image">
+        <img src="/images/consept_small.png" alt="consept image" ref="image">
     </div>
 </template>
 
