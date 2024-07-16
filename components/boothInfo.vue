@@ -78,11 +78,11 @@ export default {
         const options = {
             type: 'slide',
             rewind: true,
-            perPage: 4,
             perMove: 1,
             pagination: false,
             arrows: false,
             gap: '40px',
+            speed: 600,
             breakpoints: {
                 767: {
                     perPage: 1,
@@ -93,6 +93,7 @@ export default {
                 prev: 'splide__arrow--prev',
                 next: 'splide__arrow--next',
             },
+            padding: { left: '15%' },
         };
 
         const goPrev = () => {
@@ -171,11 +172,9 @@ export default {
 
 <style lang="scss" scoped>
 .shop-info {
-    margin-left: 15%;
     margin-bottom: 5%;
-    overflow: hidden;
     .splide-container {
-        margin: 3% 0;
+        margin: 3% 0 3% 15%;
         position: relative;
         display: flex;
         gap: 1%;

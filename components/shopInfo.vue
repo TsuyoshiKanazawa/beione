@@ -43,7 +43,6 @@
                     <div class="detail">{{ content.menuDetail }}</div>
                 </div>
             </SplideSlide>
-            <SplideSlide></SplideSlide>
         </Splide>
     </div>
 </template>
@@ -75,7 +74,6 @@ export default {
             elementsToObserve.forEach(el => observer.observe(el));
         });
 
-
         const splide = ref(null);
         const selectedDay = ref('全日');
         const isFocused = ref(false);
@@ -83,7 +81,6 @@ export default {
         const options = {
             type: 'slide',
             rewind: true,
-            perPage: 4,
             perMove: 1,
             pagination: false,
             arrows: false,
@@ -99,6 +96,7 @@ export default {
                 prev: 'splide__arrow--prev',
                 next: 'splide__arrow--next',
             },
+            padding: { left: '15%' },
         };
 
         const goPrev = () => {
@@ -175,11 +173,10 @@ export default {
 
 <style lang="scss" scoped>
 .shop-info {
-    margin-left: 15%;
     margin-bottom: 1%;
-    overflow: hidden;
+
     .splide-container {
-        margin: 3% 0;
+        margin: 3% 0 3% 15%;
         position: relative;
         display: flex;
         gap: 1%;
@@ -322,10 +319,8 @@ export default {
             transform: translateY(0);
         }
     }
-
     .shop-info-list {
         width: 100%;
-
         .shop {
             background-color: #FFECBB;
             max-width: 307px;
@@ -338,7 +333,6 @@ export default {
             padding: 7%;
             box-sizing: border-box;
         }
-
         .day-container {
             display: flex;
             justify-content: center;
@@ -375,7 +369,7 @@ export default {
             font-weight: 400;
             margin-bottom: 7%;
             height: 133px;
-            overflow: hidden;
+
         }
         opacity: 0;
         transition: 0.6s;
@@ -386,9 +380,9 @@ export default {
             transform: translateY(0);
         }
     }
-
     .shop-info-list .splide__slide {
         width: auto !important;
+        transition: transform 0.6s ease-in-out;
     }
 }
 </style>

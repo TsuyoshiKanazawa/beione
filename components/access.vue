@@ -64,7 +64,6 @@ onMounted(() => {
     gap: 4%;
     margin: 5% 0;
     .text-container {
-        font-family: "M PLUS Rounded 1c", sans-serif;
         .title {
             font-family: "Roboto", sans-serif;
             font-weight: 700;
@@ -94,6 +93,7 @@ onMounted(() => {
         .address {
             font-weight: 800;
             font-size: clamp(14px, 1.2vw, 20px);
+            margin-top: 2%;
             opacity: 0;
             transition: 0.6s;
             transform: translateY(50px);

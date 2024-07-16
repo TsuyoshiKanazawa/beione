@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="overflow: hidden;">
         <Top id="top" />
         <Consept id="consept" />
         <Howto id="howto" />

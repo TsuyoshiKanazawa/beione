@@ -78,7 +78,6 @@ export default {
     max-width: 1150px;
     width: 66vw;
     margin: auto;
-    font-family: "M PLUS Rounded 1c", sans-serif;
     margin-bottom: 5%;
     .title_e {
         font-family: "Roboto", sans-serif;
