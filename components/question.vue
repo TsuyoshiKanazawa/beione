@@ -2,8 +2,9 @@
     <div class="question-container">
         <div class="title_e">Question</div>
         <div class="title_j">よくある質問</div>
-        <div v-for="(item, index) in questions" :key="index" class="accordion" :style="{ maxHeight: getMaxHeight(index) }" @click="toggle(index)"
-            :class="{ inview: item.inView }" ref="accordion">
+        <div v-for="(item, index) in questions" :key="index" class="accordion"
+            :style="{ maxHeight: getMaxHeight(index) }" @click="toggle(index)" :class="{ inview: item.inView }"
+            ref="accordion">
             <div class="heading">{{ item.question }}</div>
             <div class="text" ref="content" :class="{ 'text-visible': item.show }">{{ item.answer }}</div>
             <img :class="{ 'arrow': true, 'arrow-rotated': item.show }" src="/images/accordionArrow.svg" alt="arrow" />
@@ -78,6 +79,22 @@ export default {
             const baseHeight = isMobile ? (questionLength >= 16 ? '20vw' : '15vw') : '60px'; // スマホで質問が15文字以上の場合、baseHeightを30vwに設定
             return this.questions[index].show ? this.contentHeights[index] : baseHeight;
         }
+    },
+    setup() {
+        const addInviewClass = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('inview');
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(addInviewClass);
+
+        onMounted(() => {
+            const elementsToObserve = document.querySelectorAll('.title_e, .title_j');
+            elementsToObserve.forEach(el => observer.observe(el));
+        });
     }
 };
 </script>
@@ -98,6 +115,14 @@ export default {
         @media screen and (max-width: 767px) {
             font-size: 5vw;
         }
+        transition: transform 0.6s;
+        opacity: 0;
+        transform: translateY(50px);
+        transition-delay: transform 0.2s;
+        &.inview {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
     .title_j {
         font-weight: 800;
@@ -105,6 +130,14 @@ export default {
         margin-top: 4%;
         @media screen and (max-width: 767px) {
             font-size: 8vw;
+        }
+        transition: transform 0.6s;
+        opacity: 0;
+        transform: translateY(50px);
+        transition-delay: transform 0.2s;
+        &.inview {
+            opacity: 1;
+            transform: translateY(0);
         }
     }
     .accordion {

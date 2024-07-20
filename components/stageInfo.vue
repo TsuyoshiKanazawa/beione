@@ -66,7 +66,7 @@ export default {
         const observer = new IntersectionObserver(addInviewClass);
 
         onMounted(() => {
-            const elementsToObserve = document.querySelectorAll('.splide-container, .shop-info-list');
+            const elementsToObserve = document.querySelectorAll('.splide-container, .shop-info-list, .title.sp-only');
             elementsToObserve.forEach(el => observer.observe(el));
         });
 
@@ -181,6 +181,14 @@ export default {
         font-weight: 700;
         font-size: 4vw;
         margin-left: 7%;
+        opacity: 0;
+        transition: 0.6s;
+        transform: translateY(50px);
+        transition-delay: 0.2s;
+        &.inview {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
     .splide-container {
         margin: 3% 0 3% 15%;

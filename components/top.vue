@@ -6,7 +6,7 @@
                 <img src="/images/title.svg" alt="title" class="top-title pc-only" ref="title">
                 <img src="/images/sp/title.svg" alt="title" class="top-title sp-only" ref="titleSp">
                 <img src="/images/jaShimane1.png" alt="sponsorship" class="ja-shimane pc-only" ref="ja">
-                <img src="/images/sp/jaShimane1.png" alt="sponsorship" class="ja-shimane sp-only" ref="jaSp">
+                <img src="/images/sp/jaShimane1.svg" alt="sponsorship" class="ja-shimane sp-only" ref="jaSp">
                 <div class="top-overview" ref="overview">
                     <div class="section">
                         <div class="subject">〈開催日時〉</div>
@@ -146,7 +146,7 @@ onMounted(() => {
                 }
                 @media screen and (max-width: 767px) {
                     width: 45vw;
-                    margin: 4% auto 0;
+                    margin: 6% auto 0;
                 }
             }
         }
