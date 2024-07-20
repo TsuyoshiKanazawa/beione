@@ -3,7 +3,7 @@
         <div class="left">
             <div class="section">
                 <div>主催</div>
-                <div>米-1グランプリ松江2024実行委員会</div>
+                <div>米1グランプリ松江2024実行委員会</div>
             </div>
             <div class="section">
                 <div>協力</div>
@@ -41,7 +41,7 @@
                 </a>
             </div>
         </div>
-        <div class="copyright">Copyright 2024 米-1グランプリ松江2024実行委員会</div>
+        <div class="copyright">Copyright 2024 米1グランプリ松江2024実行委員会</div>
     </footer>
 </template>
 
@@ -102,8 +102,9 @@ footer {
         right: 5%;
         font-size: clamp(9px, 1vw, 14px);
     }
+    @media screen and (max-width: 767px) {
+        display: none;
+    }
 }
-@media screen and (max-width: 900px) {
 
-}
 </style>

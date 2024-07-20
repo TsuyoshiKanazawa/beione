@@ -7,8 +7,9 @@
                 </clipPath>
             </defs>
         </svg>
+        <div class="title sp-only">Booth Info</div>
         <div class="splide-container" ref="select">
-            <div class="title">Booth Info</div>
+            <div class="title pc-only">Booth Info</div>
             <div class="select-wrapper" ref="selectWrapper" :data-open="isFocused">
                 <select name="select" id="select" v-model="selectedDay" @click="onClick" @blur="onBlur">
                     <option value="全日">全日</option>
@@ -87,6 +88,8 @@ export default {
             breakpoints: {
                 767: {
                     perPage: 1,
+                    gap: '13px',
+                    padding: { left: '12%' },
                 },
             },
             classes: {
@@ -174,16 +177,26 @@ export default {
 <style lang="scss" scoped>
 .shop-info {
     margin-bottom: 5%;
+    .title.sp-only {
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        font-size: 4vw;
+        margin-left: 7%;
+    }
     .splide-container {
         margin: 3% 0 3% 15%;
         position: relative;
         display: flex;
         gap: 1%;
-
+        @media screen and (max-width: 767px) {
+            margin: 3% 0 3% 12%;
+            justify-content: space-between;
+            gap: 4%;
+            padding-right: 10%;
+        }
         .title {
             font-family: "Roboto", sans-serif;
             font-weight: 700;
-            font-size: 1.5vw;
             font-size: clamp(14px, 1.5vw, 20px);
             margin-right: 1%;
             line-height: 1.5;
@@ -205,15 +218,16 @@ export default {
                 }
             }
 
-            &:hover {
-                .selectArrow {
-                    filter: brightness(10);
+            @media screen and (min-width: 768px) {
+                &:hover {
+                    .selectArrow {
+                        filter: brightness(10);
+                    }
                 }
-            }
-
-            &:hover select {
-                background-color: #2D2D2D;
-                color: #fff;
+                &:hover select {
+                    background-color: #2D2D2D;
+                    color: #fff;
+                }
             }
 
             .selectArrow {
@@ -224,6 +238,9 @@ export default {
                 pointer-events: none;
                 transition: 0.2s;
                 width: 20%;
+                @media screen and (max-width: 767px) {
+                    margin-top: 11%;
+                }
             }
 
             & select {
@@ -245,6 +262,10 @@ export default {
                 min-height: 24px;
                 transition: 0.2s;
                 cursor: pointer;
+                @media screen and (max-width: 767px) {
+                    width: 8vw;
+                    min-width: 80px;
+                }
             }
         }
 
@@ -254,6 +275,10 @@ export default {
             border: none;
             background-color: #2D2D2D;
             margin: auto 0;
+            @media screen and (max-width: 767px) {
+                opacity: 0;
+                width: 50vw;
+            }
         }
 
         .splide__arrow {
@@ -284,6 +309,10 @@ export default {
                 height: 45%;
                 border: 0.2vw solid currentColor;
                 box-sizing: border-box;
+                @media screen and (max-width: 767px) {
+                    border: 2px solid currentColor;
+                    margin-left: 5%;
+                }
             }
 
             &.splide__arrow--prev::after {
@@ -300,12 +329,13 @@ export default {
                 transition: 0.2s;
             }
 
-            &:hover {
-                background-color: #2D2D2D;
-
-                &.splide__arrow--prev::after,
-                &.splide__arrow--next::after {
-                    color: #fff;
+            @media screen and (min-width: 768px) {
+                &:hover {
+                    background-color: #2D2D2D;
+                    &.splide__arrow--prev::after,
+                    &.splide__arrow--next::after {
+                        color: #fff;
+                    }
                 }
             }
         }

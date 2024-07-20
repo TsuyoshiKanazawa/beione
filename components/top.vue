@@ -2,9 +2,11 @@
     <div class="top">
         <div class="top-visual">
             <img src="/images/logo.svg" alt="logo" class="logo" ref="logo">
-            <div style="width: fit-content;">
-                <img src="/images/title.svg" alt="title" class="top-title" ref="title">
-                <img src="/images/jaShimane1.svg" alt="sponsorship" class="ja-shimane" ref="ja">
+            <div class="text-container">
+                <img src="/images/title.svg" alt="title" class="top-title pc-only" ref="title">
+                <img src="/images/sp/title.svg" alt="title" class="top-title sp-only" ref="titleSp">
+                <img src="/images/jaShimane1.png" alt="sponsorship" class="ja-shimane pc-only" ref="ja">
+                <img src="/images/sp/jaShimane1.png" alt="sponsorship" class="ja-shimane sp-only" ref="jaSp">
                 <div class="top-overview" ref="overview">
                     <div class="section">
                         <div class="subject">〈開催日時〉</div>
@@ -32,7 +34,9 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const logo = ref(null);
 const title = ref(null);
+const titleSp = ref(null);
 const ja = ref(null);
+const jaSp = ref(null);
 const overview = ref(null);
 
 onMounted(() => {
@@ -50,8 +54,14 @@ onMounted(() => {
     if (title.value) {
         observer.observe(title.value);
     }
+    if (titleSp.value) {
+        observer.observe(titleSp.value);
+    }
     if (ja.value) {
         observer.observe(ja.value);
+    }
+    if (jaSp.value) {
+        observer.observe(jaSp.value);
     }
     if (overview.value) {
         observer.observe(overview.value);
@@ -62,9 +72,12 @@ onMounted(() => {
 <style lang="scss" scoped>
 .top {
     position: relative;
-    font-family: "Noto Sans JP", sans-serif;
-    position: relative;
     height: 100vh;
+    @media screen and (max-width: 767px) {
+        height: auto;
+        padding-top: 20%;
+        text-align: center;
+    }
     .top-visual {
         display: flex;
         justify-content: center;
@@ -73,46 +86,71 @@ onMounted(() => {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -40%);
+        @media screen and (max-width: 767px) {
+            position: static;
+            display: block;
+            top: 43%;
+            transform: none;
+            text-align: center;
+        }
         .logo {
             max-width: 603px;
             width: 45vw;
             opacity: 0;
             transition: 0.8s;
             transform: translateY(50px);
+    
             &.inview {
                 opacity: 1;
                 transform: translateY(0);
+            }
+    
+            @media screen and (max-width: 767px) {
+                width: 75vw;
+            }
+        }
+        .text-container {
+            width: fit-content;
+            @media screen and (max-width: 767px) {
+                width: auto;
+            }
+            .top-title {
+                max-width: 488px;
+                width: 37vw;
+                margin: -2% 0 0 0;
+                opacity: 0;
+                transition: 0.8s;
+                transform: translateY(50px);
+                transition-delay: 0.2s;
+                &.inview {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                @media screen and (max-width: 767px) {
+                    width: 65vw;
+                    margin: 3% auto 0;
+                }
+            }
+            .ja-shimane {
+                max-width: 361px;
+                width: 27vw;
+                display: block;
+                margin-top: 3%;
+                opacity: 0;
+                transition: 0.8s;
+                transform: translateY(50px);
+                transition-delay: 0.4s;
+                &.inview {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                @media screen and (max-width: 767px) {
+                    width: 45vw;
+                    margin: 4% auto 0;
+                }
             }
         }
 
-        .top-title {
-            max-width: 488px;
-            width: 37vw;
-            margin: -2% 0 0 0;
-            opacity: 0;
-            transition: 0.8s;
-            transform: translateY(50px);
-            transition-delay: 0.2s;
-            &.inview {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .ja-shimane {
-            max-width: 361px;
-            width: 27vw;
-            display: block;
-            margin-top: 3%;
-            opacity: 0;
-            transition: 0.8s;
-            transform: translateY(50px);
-            transition-delay: 0.4s;
-            &.inview {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
     }
 
     .top-overview {
@@ -127,11 +165,18 @@ onMounted(() => {
                 font-weight: 800;
                 margin-left: -1%;
                 margin-top: 3%;
+                @media screen and (max-width: 767px) {
+                    width: auto;
+                    font-size: 2.8vw;
+                }
             }
 
             .text {
                 font-size: clamp(8px, 2.2vw, 29px);
                 font-weight: 900;
+                @media screen and (max-width: 767px) {
+                    font-size: 5vw;
+                }
             }
         }
         opacity: 0;

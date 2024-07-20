@@ -1,8 +1,9 @@
 <template>
     <div class="abd-container">
+        <img src="/images/ambassador.jpg" alt="ambassador picture" class="abd-pic sp-only" ref="imageSp">
         <div class="title" ref="title">イベントアンバサダー</div>
         <div class="abd-contents">
-            <img src="/images/ambassador.jpg" alt="ambassador picture" class="abd-pic" ref="image">
+            <img src="/images/ambassador.jpg" alt="ambassador picture" class="abd-pic pc-only" ref="imagePc">
             <div class="text-container" ref="text">
                 <div class="heading">
                     親子向け音楽ユニット<br>
@@ -30,7 +31,8 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const title = ref(null);
-const image = ref(null);
+const imagePc = ref(null);
+const imageSp = ref(null);
 const text = ref(null);
 
 onMounted(() => {
@@ -45,8 +47,11 @@ onMounted(() => {
     if (title.value) {
         observer.observe(title.value);
     }
-    if (image.value) {
-        observer.observe(image.value);
+    if (imagePc.value) {
+        observer.observe(imagePc.value);
+    }
+    if (imageSp.value) {
+        observer.observe(imageSp.value);
     }
     if (text.value) {
         observer.observe(text.value);
@@ -56,10 +61,12 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .abd-container {
-    max-width: 1192px;
-    max-height: 509px;
-    min-width: 800px;
-    min-height: 341px;
+    @media screen and (min-width: 768px) {
+        max-width: 1192px;
+        max-height: 509px;
+        min-width: 800px;
+        min-height: 341px;
+    }
     width: 75vw;
     height: 33vw;
     background-color: #FED9D9;
@@ -67,6 +74,12 @@ onMounted(() => {
     border-radius: 20px;
     box-sizing: border-box;
     padding: 3% 4% 0;
+    @media screen and (max-width: 767px) {
+        width: 85vw;
+        height: auto;
+        position: relative;
+        margin-top: 45%;
+    }
     .title {
         font-size: clamp(20px, 2vw, 32px);
         text-align: center;
@@ -75,6 +88,14 @@ onMounted(() => {
         transition: 0.6s;
         transform: translateY(50px);
         transition-delay: 0.2s;
+        @media screen and (max-width: 767px) {
+            writing-mode: vertical-rl;
+            font-size: 4.7vw;
+            position: absolute;
+            top: 3%;
+            right: 4%;
+            letter-spacing: 0.12rem;
+        }
         &.inview {
             opacity: 1;
             transform: translateY(0);
@@ -102,12 +123,22 @@ onMounted(() => {
         }
         .text-container {
             font-weight: 700;
+            @media screen and (max-width: 767px) {
+                margin-top: 45%;
+                margin-bottom: 5%;
+            }
             .heading {
                 font-size: clamp(20px, 2vw, 32px);
+                @media screen and (max-width: 767px) {
+                    font-size: 6vw;
+                }
             }
             .text {
                 margin-top: 4%;
                 font-size: clamp(10px, 0.9vw, 14px);
+                @media screen and (max-width: 767px) {
+                    font-size: 3.3vw;
+                }
             }
             opacity: 0;
             transition: 0.6s;
@@ -117,6 +148,21 @@ onMounted(() => {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+    }
+    .abd-pic.sp-only {
+        position: absolute;
+        top: -15%;
+        left: -25%;
+        width: 90vw;
+        border-radius: 20px;
+        opacity: 0;
+        transition: 0.6s;
+        transform: translateY(50px);
+        transition-delay: 0.2s;
+        &.inview {
+            opacity: 1;
+            transform: translateY(0);
         }
     }
 }

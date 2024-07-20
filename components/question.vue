@@ -2,7 +2,7 @@
     <div class="question-container">
         <div class="title_e">Question</div>
         <div class="title_j">よくある質問</div>
-        <div v-for="(item, index) in questions" :key="index" class="accordion" :style="{ maxHeight: item.show ? contentHeights[index] : '60px' }" @click="toggle(index)"
+        <div v-for="(item, index) in questions" :key="index" class="accordion" :style="{ maxHeight: getMaxHeight(index) }" @click="toggle(index)"
             :class="{ inview: item.inView }" ref="accordion">
             <div class="heading">{{ item.question }}</div>
             <div class="text" ref="content" :class="{ 'text-visible': item.show }">{{ item.answer }}</div>
@@ -65,9 +65,18 @@ export default {
             nextTick(() => {
                 this.$refs.accordion.forEach((accordion, index) => {
                     const content = accordion.querySelector('.text');
-                    this.contentHeights[index] = (content.scrollHeight + 60) + 'px';
+                    const isMobile = window.innerWidth <= 767;
+                    const questionLength = this.questions[index].question.length;
+                    const extraHeight = isMobile ? (questionLength >= 16 ? 90 : 70) : 60; // スマホで質問が15文字以上の場合、extraHeightを90に設定
+                    this.contentHeights[index] = (content.scrollHeight + extraHeight) + 'px';
                 });
             });
+        },
+        getMaxHeight(index) {
+            const isMobile = window.innerWidth <= 767;
+            const questionLength = this.questions[index].question.length;
+            const baseHeight = isMobile ? (questionLength >= 16 ? '20vw' : '15vw') : '60px'; // スマホで質問が15文字以上の場合、baseHeightを30vwに設定
+            return this.questions[index].show ? this.contentHeights[index] : baseHeight;
         }
     }
 };
@@ -79,15 +88,24 @@ export default {
     width: 66vw;
     margin: auto;
     margin-bottom: 5%;
+    @media screen and (max-width: 767px) {
+        width: 85vw;
+    }
     .title_e {
         font-family: "Roboto", sans-serif;
         font-weight: 700;
         font-size: clamp(18px, 1.6vw, 24px);
+        @media screen and (max-width: 767px) {
+            font-size: 5vw;
+        }
     }
     .title_j {
         font-weight: 800;
         font-size: clamp(24px, 2vw, 32px);
         margin-top: 4%;
+        @media screen and (max-width: 767px) {
+            font-size: 8vw;
+        }
     }
     .accordion {
         background-color: #FFDD55;
@@ -98,36 +116,62 @@ export default {
         position: relative;
         box-sizing: border-box;
         cursor: pointer;
+        @media screen and (max-width: 767px) {
+            padding: 4vw 16% 4vw 10%;
+            border-radius: 30px;
+            margin-top: 7%;
+        }
         .heading {
             font-size: clamp(22px, 1.8vw, 28px);
             font-weight: 800;
+            @media screen and (max-width: 767px) {
+                font-size: 4vw;
+            }
         }
         .text {
             font-size: clamp(12px, 1vw, 17px);
             padding-right: 2%;
             visibility: hidden;
+            @media screen and (max-width: 767px) {
+                font-size: 3vw;
+                margin-top: 5%;
+            }
             &.text-visible {
                 visibility: visible;
             }
         }
-        &:hover {
-            background-color: #2D2D2D;
-            color: #fff;
+        @media screen and (min-width: 768px) {
+            &:hover {
+                background-color: #2D2D2D;
+                color: #fff;
+            }
         }
         .arrow {
             position: absolute;
             top: 30%;
             right: 3%;
             transition: all 0.2s;
+            @media screen and (max-width: 767px) {
+                top: 50%;
+                right: 9%;
+                width: 6%;
+                transform: translateY(-50%);
+            }
         }
         .arrow-rotated {
             transform: translateY(-50%) rotate(-90deg);
+            @media screen and (max-width: 767px) {
+                transform: translateY(-50%) rotate(-90deg);
+                top: 10vw;
+            }
         }
-        &:hover .arrow {
-            filter: brightness(10);
-        }
-        &:hover .arrow {
-            filter: brightness(10);
+        @media screen and (min-width: 768px) {
+            &:hover .arrow {
+                filter: brightness(10);
+            }
+            &:hover .arrow {
+                filter: brightness(10);
+            }
         }
         opacity: 0;
         transform: translateY(50px);

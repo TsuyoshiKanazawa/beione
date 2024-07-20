@@ -1,7 +1,10 @@
 <template>
     <header :class="{ 'header-hidden': isHeaderHidden }">
-        <div class="logo" @click="scrollTo('top')">
+        <div class="logo pc-only" @click="scrollTo('top')">
             <img src="/images/hd-logo.svg" alt="logo">
+        </div>
+        <div class="logo sp-only" @click="scrollTo('top')">
+            <img src="/images/sp/hd-logo.svg" alt="logo">
         </div>
         <ul>
             <li @click="scrollTo('top')">開催概要</li>
@@ -71,6 +74,12 @@ header {
     padding-left: 4%;
     box-sizing: border-box;
     transition: transform 0.3s ease, opacity 0.5s ease;
+    @media screen and (max-width: 767px) {
+        width: 100%;
+        border-radius: 0%;
+        background-color: transparent;
+        top: 2%;
+    }
     .logo {
         height: fit-content;
         margin: auto 0;
@@ -108,6 +117,9 @@ header {
             &:hover {
                 color: #FFDD55;
             }
+        }
+        @media screen and (max-width: 767px) {
+            display: none;
         }
     }
 }

@@ -16,3 +16,22 @@ body {
     background-repeat: repeat-y;
     background-size: cover;
 }
+
+.sp-only {
+    @media screen and (min-width: 768px) {
+        display: none !important;
+    }
+    
+    @media screen and (max-width: 767px) {
+        display: block !important;
+    }
+}
+
+.pc-only {
+    @media screen and (min-width: 768px) {
+        display: block !important;
+    }
+    @media screen and (max-width: 767px) {
+        display: none !important;
+    }
+}

@@ -4,8 +4,7 @@
             <div class="title" ref="title">How to enjoy BEI-ONE GP</div>
             <div class="text" ref="text">
                 米1グランプリ<br>
-                松江の<br>
-                楽しみ方
+                松江の<br class="pc-only">楽しみ方
             </div>
         </div>
         <div class="step-container">
@@ -25,7 +24,7 @@
                     <div class="large">2</div>
                 </div>
                 <div class="exp">
-                    <div class="text">チケット購入で投票用紙をゲット</div>
+                    <div class="text">チケット購入で<br class="sp-only">投票用紙をゲット</div>
                     <div class="small">※500円購入ごとに1枚の投票用紙をお渡しします！</div>
                 </div>
             </div>
@@ -99,6 +98,11 @@ onMounted(() => {
     justify-content: center;
     gap: 7%;
     margin: 10% 0 4%;
+    @media screen and (max-width: 767px) {
+        display: block;
+        padding: 0 8%;
+        margin: 15% 0 4%;
+    }
     .text-container {
         font-weight: 700;
         .title {
@@ -111,6 +115,9 @@ onMounted(() => {
             &.inview {
                 opacity: 1;
                 transform: translateY(0);
+            }
+            @media screen and (max-width: 767px) {
+                font-size: 4vw;
             }
         }
         .text {
@@ -125,16 +132,25 @@ onMounted(() => {
                 opacity: 1;
                 transform: translateY(0);
             }
+            @media screen and (max-width: 767px) {
+                font-size: 8vw;
+            }
         }
     }
     .step-container {
         margin-top: -4%;
+        @media screen and (max-width: 767px) {
+            margin-top: 8%;
+        }
         .section {
             display: flex;
             justify-content: flex-start;
             gap: 3%;
             width: 32vw;
             margin-top: 4%;
+            @media screen and (max-width: 767px) {
+                width: auto;
+            }
             .step {
                 background-color: #FFDD55;
                 width: 4.5vw;
@@ -151,16 +167,36 @@ onMounted(() => {
                 .large {
                     font-size: clamp(18px, 2.3vw, 36px);
                 }
+                @media screen and (max-width: 767px) {
+                    max-width: none;
+                    max-height: none;
+                    width: 14vw;
+                    height: 14vw;
+                    font-size: 3vw;
+                    padding-top: 2%;
+                    .large {
+                        font-size: 7vw;
+                    }
+                }
             }
             .exp {
                 .text {
                     font-weight: 700;
                     font-size: clamp(18px, 1.6vw, 28px);
                     margin-top: 2%;
+                    @media screen and (max-width: 767px) {
+                        font-size: 5.5vw;
+                        line-height: 1.2;
+                        margin-top: 1%;
+                    }
                 }
                 .small {
                     font-weight: 400;
                     font-size: clamp(8px, 1vw, 16px);
+                    @media screen and (max-width: 767px) {
+                        font-size: 2.5vw;
+                        margin-top: 3%;
+                    }
                 }
             }
             opacity: 0;
