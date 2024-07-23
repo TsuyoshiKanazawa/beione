@@ -17,9 +17,18 @@
             <div class="section">
                 <div>協賛</div>
                 <div class="sponsor-logo">
-                    <div class="sponsor"></div>
-                    <div class="sponsor"></div>
-                    <div class="sponsor"></div>
+                    <div class="sponsor">
+                        <img src="/images/sponsor/jaShimane2.png" alt="sponsor" class="jaShimane">
+                    </div>
+                    <div class="sponsor">
+                        <img src="/images/sponsor/toyosolar.png" alt="sponsor" class="toyosolar">
+                    </div>
+                    <div class="sponsor">
+                        <img src="/images/sponsor/sapporo.png" alt="sponsor" class="sapporo">
+                    </div>
+                    <div class="sponsor">
+                        <img src="/images/sponsor/itoen.png" alt="sponsor" class="itoen">
+                    </div>
                 </div>
             </div>
         </div>
@@ -30,13 +39,13 @@
             </div>
             <div class="logo">
                 <img src="/images/ft-logo.svg" alt="logo" class="ft-logo">
-                <a href="">
+                <a href="" target="_blank">
                     <img src="/images/facebook.svg" alt="facebook">
                 </a>
-                <a href="">
+                <a href="https://www.instagram.com/bei1matsue/" target="_blank">
                     <img src="/images/instagram.svg" alt="instagram">
                 </a>
-                <a href="">
+                <a href="https://lin.ee/Q5reIsY" target="_blank">
                     <img src="/images/line.svg" alt="line">
                 </a>
             </div>
@@ -80,6 +89,7 @@ footer {
             .sponsor-logo {
                 display: flex;
                 justify-content: flex-start;
+                flex-wrap: wrap;
                 gap: 4%;
                 width: 100%;
                 @media screen and (max-width: 767px) {
@@ -87,13 +97,33 @@ footer {
                     gap: 7%;
                 }
                 .sponsor {
-                    width: 120px;
+                    width: 13vw;
+                    margin-bottom: 3%;
                     height: 70px;
-                    background-color: #D9D9D9;
+                    background-color: #fff;
+                    position: relative;
+                    img {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                    .jaShimane {
+                        width: 80%;
+                    }
+                    .toyosolar {
+                        width: 65%;
+                    }
+                    .sapporo {
+                        width: 35%;
+                    }
+                    .itoen {
+                        width: 80%;
+                    }
                     @media screen and (max-width: 767px) {
                         margin-bottom: 5%;
-                        width: 28vw;
-                        height: 18vw;
+                        width: 30vw;
+                        height: 11vw;
                     }
                 }
             }

@@ -27,7 +27,9 @@
                 <div class="shop">
                     <svg width="100%" height="48%" viewBox="0 0 350 250" style="margin: auto; display: block;">
                         <image :href="content.image.src" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
-                            clip-path="url(#clip-path)" />
+                            clip-path="url(#clip-path)" v-if="content.image && content.image.src" />
+                        <image href="/images/noImage.jpg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
+                            clip-path="url(#clip-path)" v-else />
                     </svg>
                     <div class="day-container">
                         <div v-for="(schedule) in content.schedule" :key="index" class="day"
@@ -39,7 +41,6 @@
                     <div class="detail">{{ content.boothDetail }}</div>
                 </div>
             </SplideSlide>
-            <SplideSlide></SplideSlide>
         </Splide>
     </div>
 </template>

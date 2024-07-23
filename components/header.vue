@@ -75,7 +75,6 @@ export default {
         },
         handleMenuShow() {
             this.menuShow = !this.menuShow
-            console.log(this.menuShow)
         }
     }
 };

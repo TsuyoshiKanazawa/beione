@@ -27,7 +27,9 @@
                 <div class="shop">
                     <svg width="100%" height="24%" viewBox="0 0 350 250" style="margin: auto; display: block;">
                         <image :href="content.image.src" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
-                            clip-path="url(#clip-path)" />
+                            clip-path="url(#clip-path)" v-if="content.image && content.image.src" />
+                        <image href="/images/noImage.jpg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
+                            clip-path="url(#clip-path)" v-else />
                     </svg>
                     <div class="day-container">
                         <div v-for="(day) in content.day" :key="day" class="day" :class="getClassForDay(day)">
@@ -38,7 +40,9 @@
                     <div class="detail">{{ content.storeDetail }}</div>
                     <svg width="100%" height="24%" viewBox="0 0 350 250" style="margin: auto; display: block;">
                         <image :href="content.menuImage.src" width="100%" height="100%"
-                            preserveAspectRatio="xMidYMid slice" clip-path="url(#clip-path)" />
+                            preserveAspectRatio="xMidYMid slice" clip-path="url(#clip-path)" v-if="content.menuImage && content.menuImage.src" />
+                        <image href="/images/noImage.jpg" width="100%" height="100%"
+                            preserveAspectRatio="xMidYMid slice" clip-path="url(#clip-path)" v-else />
                     </svg>
                     <div class="name">{{ content.menuName }}</div>
                     <div class="detail">{{ content.menuDetail }}</div>
@@ -133,7 +137,7 @@ export default {
                 content.day.includes(selectedDay.value)
             );
         });
-
+        console.log(filteredContents)
         const getClassForDay = (day) => {
             if (day.includes('9/7(土)')) {
                 return 'saturday';
