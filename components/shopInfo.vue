@@ -122,7 +122,8 @@ export default {
                 appUid: 'landingPage',
                 modelUid: 'vendor',
                 query: {
-                    select: ['image', 'day', 'name', 'storeDetail', 'menuImage', 'menuName', 'menuDetail']
+                    select: ['image', 'day', 'name', 'storeDetail', 'menuImage', 'menuName', 'menuDetail'],
+                    order: ['-_sys.customOrder']
                 }
             });
             newtContents.value = response;

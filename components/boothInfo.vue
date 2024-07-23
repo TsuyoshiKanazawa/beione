@@ -116,7 +116,8 @@ export default {
                 appUid: 'landingPage',
                 modelUid: 'booth',
                 query: {
-                    select: ['image', 'schedule', 'name', 'boothDetail']
+                    select: ['image', 'schedule', 'name', 'boothDetail'],
+                    order: ['-_sys.customOrder']
                 }
             });
             newtContents.value = response;
