@@ -98,8 +98,8 @@ footer {
                 }
                 .sponsor {
                     width: 13vw;
+                    height: 4.5vw;
                     margin-bottom: 3%;
-                    height: 70px;
                     background-color: #fff;
                     position: relative;
                     img {
