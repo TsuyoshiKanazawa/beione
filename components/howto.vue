@@ -15,7 +15,8 @@
                 </div>
                 <div class="exp">
                     <div class="text">飲食チケットを購入</div>
-                    <div class="small">※各ブースでの直接のお支払はできません！</div>
+                    <div class="small">※各ブースでの直接のお支払いはできません！</div>
+                    <div class="small">※チケットは各ブースの営業時間内にご利用願います。</div>
                 </div>
             </div>
             <div class="section" ref="section2">
@@ -147,7 +148,7 @@ onMounted(() => {
             justify-content: flex-start;
             gap: 3%;
             width: 32vw;
-            margin-top: 4%;
+            margin-top: 5%;
             @media screen and (max-width: 767px) {
                 width: auto;
             }
@@ -180,6 +181,10 @@ onMounted(() => {
                 }
             }
             .exp {
+                @media screen and (min-width: 768px) {
+                    height: 5vw;
+                    min-height: 50px;
+                }
                 .text {
                     font-weight: 700;
                     font-size: clamp(18px, 1.6vw, 28px);

@@ -406,7 +406,7 @@ export default {
             font-weight: 800;
         }
         .detail {
-            font-size: clamp(9px, 0.8vw, 12px);
+            font-size: clamp(12px, 1vw, 14px);
             font-family: "M PLUS Rounded 1c", sans-serif;
             font-weight: 400;
             margin-bottom: 7%;

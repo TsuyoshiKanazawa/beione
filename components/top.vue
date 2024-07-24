@@ -16,11 +16,11 @@
                     </div>
                     <div class="section">
                         <div class="subject">〈開催場所〉</div>
-                        <div class="text">松江市総合体育館 第一駐車場</div>
+                        <div class="text">松江市総合体育館 敷地内特設会場</div>
                     </div>
                     <div class="section">
                         <div class="subject">〈入場料〉</div>
-                        <div class="text">無料</div>
+                        <div class="text">無料<br><small>※IZUMO OROCHI FESの入場には<br class="sp-only">有料のチケットが必要です。</small></div>
                     </div>
                 </div>
             </div>
@@ -176,6 +176,12 @@ onMounted(() => {
                 font-weight: 900;
                 @media screen and (max-width: 767px) {
                     font-size: 5vw;
+                    small {
+                        font-size: 3vw !important;
+                    }
+                }
+                small {
+                    font-size: clamp(4px, 1.1vw, 16px);
                 }
             }
         }

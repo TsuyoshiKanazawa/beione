@@ -3,8 +3,7 @@
         <div class="text-container">
             <div class="title" ref="title">Access</div>
             <div class="name" ref="name">
-                松江市総合体育館<br>
-                第一駐車場
+                松江市総合体育館
             </div>
             <div class="address" ref="address">（島根県松江市学園南１丁目２１−１）</div>
             <iframe
