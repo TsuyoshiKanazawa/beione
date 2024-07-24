@@ -39,7 +39,7 @@
             </div>
             <div class="logo">
                 <img src="/images/ft-logo.svg" alt="logo" class="ft-logo">
-                <a href="" target="_blank">
+                <a href="https://www.facebook.com/profile.php?id=61563007204939" target="_blank">
                     <img src="/images/facebook.svg" alt="facebook">
                 </a>
                 <a href="https://www.instagram.com/bei1matsue/" target="_blank">
