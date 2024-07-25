@@ -138,7 +138,7 @@ export default {
                 content.day.includes(selectedDay.value)
             );
         });
-        console.log(filteredContents)
+        //console.log(filteredContents)
         const getClassForDay = (day) => {
             if (day.includes('9/7(土)')) {
                 return 'saturday';
@@ -153,7 +153,7 @@ export default {
                 isFocused.value = false;
                 return
             } else {
-                console.log(isFocused.value)
+                //console.log(isFocused.value)
                 isFocused.value = true;
                 return
             }
