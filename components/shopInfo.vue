@@ -369,8 +369,8 @@ export default {
             min-width: 252px;
             width: 21vw;
             max-height: 790px;
-            min-height: 630px;
-            height: 53vw;
+            min-height: 670px;
+            height: 58vw;
             border-radius: 20px;
             padding: 7%;
             box-sizing: border-box;

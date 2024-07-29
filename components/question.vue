@@ -22,7 +22,7 @@ export default {
                 { question: '雨天でも開催されますか？', answer: '雨天決行ですが、荒天の場合は中止となる場合もございます。荒天、自然災害が生じた場合の開催の有無は、公式サイトや公式SNSにてお知らせ致します。', show: false, inView: false },
                 { question: '入場料は必要ですか？', answer: '入場料無料です。飲食代は別途必要です。また、IZUMO OROCHI FESの入場には有料のチケットが必要です。', show: false, inView: false },
                 { question: '飲食物の持ち込みはできますか？', answer: '会場内販売以外の飲食物の会場への持ち込みはご遠慮ください。', show: false, inView: false },
-                { question: 'チケットブースで使用できる決済方法は？', answer: '現金クレジット（VISA／Master／JCB／Amex／Diners／Discover）電子マネー（交通系／楽天Edy／WAON／nanaco／iD／ QUICPay）QR決済（PayPay／d払い／au PAY／メルペイ／J- Coin Pay／ゆうちょペイ／楽天ペイ／WeChatPay／Alipay）', show: false, inView: false },
+                { question: 'チケットブースで使用できる決済方法は？', answer: '現金クレジット（VISA／Master／JCB／Amex／Diners／Discover）電子マネー（交通系／楽天Edy／nanaco／QUICPay）QR決済（PayPay／d払い／au PAY／メルペイ／J-Coin Pay／ゆうちょペイ／楽天ペイ／WeChatPay／Alipay）', show: false, inView: false },
                 { question: 'お酒やソフトドリンクなどの飲みものも販売していますか？', answer: 'オフィシャルバーにてお酒・ソフトドリンクは販売しております。未成年による飲酒、及び飲酒運転は固くお断りいたします。なお、自転車も車両の一種（軽車両）ですので、ルールをお守りください。', show: false, inView: false },
                 { question: '食事ができるところ、休憩できるところはありますか？', answer: 'テーブルや椅子の他、レジャーシートを敷いてお食事していただけるスペースをご用意しております。', show: false, inView: false }
             ],

@@ -5,18 +5,28 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: {
-        lang: 'ja'
+        lang: 'ja',
+        prefix: 'og: http://ogp.me/ns#'
       },
       link: [
         { rel: "icon", type: "image/svg", href: "/favicon.svg" },
+        { rel: "shortcut icon", type: "image/ico", href: "/favicon.ico" },
       ],
       meta: [
-        { property: 'og:title', content: '米１グランプリ松江2024｜お米で地方から日本を元気に！' },
-        { name: 'description', content: 'こだわりのメニューを食べ比べ、来場者の投票でナンバーワンを決める、お祭りのように楽しく、真剣な食イベント！' },
-        { property: 'og:description', content: 'こだわりのメニューを食べ比べ、来場者の投票でナンバーワンを決める、お祭りのように楽しく、真剣な食イベント！' },
-        { property: 'og:image', content: 'https://bei1.jp/images/ogp.jpg' },
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:image', content: 'https://bei1.jp/images/ogp.jpg' }
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0' },
+        { hid: 'description', name: 'description', content: 'こだわりのメニューを食べ比べ、来場者の投票でナンバーワンを決める、お祭りのように楽しく、真剣な食イベント！' },
+        { name: 'format-detection', content: 'telephone=no' },
+        { 'http-equiv': 'x-ua-compatible', content: 'ie=edge' },
+        { 'http-equiv': 'content-language', content: 'ja' },
+        { hid: 'og:site_name', property: 'og:site_name', content: '米１グランプリ松江2024｜お米で地方から日本を元気に！' },
+        { hid: 'og:type', property: 'og:type', content: 'website' },
+        { hid: 'og:url', property: 'og:url', content: 'https://slgbtqplus-center.org/' },
+        { hid: 'og:title', property: 'og:title', content: '米１グランプリ松江2024｜お米で地方から日本を元気に！' },
+        { hid: 'og:description', property: 'og:description', content: 'こだわりのメニューを食べ比べ、来場者の投票でナンバーワンを決める、お祭りのように楽しく、真剣な食イベント！' },
+        { hid: 'og:image', property: 'og:image', content: 'https://bei1.jp/images/ogp.jpg' },
+        { hid: 'twitter:card', property: 'twitter:card', content: 'summary_large_image' },
+        { hid: 'twitter:site', property: 'twitter:site', content: '@' }
       ]
     }
   },

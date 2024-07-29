@@ -12,7 +12,7 @@
             <div class="section">
                 <div>後援</div>
                 <div>松江市、島根県、松江商工会議所<br>
-                    公益社団法人松江青年会議所、<br class="sp-only">松江市教育委員会</div>
+                    公益社団法人松江青年会議所<!--<br class="sp-only">、松江市教育委員会--></div>
             </div>
             <div class="section">
                 <div>協賛</div>
