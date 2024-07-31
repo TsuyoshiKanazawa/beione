@@ -24,7 +24,7 @@ export default {
                 { question: '飲食物の持ち込みはできますか？', answer: '会場内販売以外の飲食物の会場への持ち込みはご遠慮ください。', show: false, inView: false },
                 { question: 'チケットブースで使用できる決済方法は？', answer: '現金クレジット（VISA／Master／JCB／Amex／Diners／Discover）電子マネー（交通系／楽天Edy／nanaco／QUICPay）QR決済（PayPay／d払い／au PAY／メルペイ／J-Coin Pay／ゆうちょペイ／楽天ペイ／WeChatPay／Alipay）', show: false, inView: false },
                 { question: 'お酒やソフトドリンクなどの飲みものも販売していますか？', answer: 'オフィシャルバーにてお酒・ソフトドリンクは販売しております。未成年による飲酒、及び飲酒運転は固くお断りいたします。なお、自転車も車両の一種（軽車両）ですので、ルールをお守りください。', show: false, inView: false },
-                { question: '食事ができるところ、休憩できるところはありますか？', answer: 'テーブルや椅子の他、レジャーシートを敷いてお食事していただけるスペースをご用意しております。', show: false, inView: false }
+                { question: '食事ができるところ、休憩できるところはありますか？', answer: 'テーブルや椅子の他、お食事していただけるスペースをご用意しております。', show: false, inView: false }
             ],
             accordions: ref([]),
             contentHeights: []
