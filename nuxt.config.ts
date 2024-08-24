@@ -21,7 +21,7 @@ export default defineNuxtConfig({
         { 'http-equiv': 'content-language', content: 'ja' },
         { hid: 'og:site_name', property: 'og:site_name', content: '米１グランプリ松江2024｜お米で地方から日本を元気に！' },
         { hid: 'og:type', property: 'og:type', content: 'website' },
-        { hid: 'og:url', property: 'og:url', content: 'https://slgbtqplus-center.org/' },
+        { hid: 'og:url', property: 'og:url', content: 'https://bei1.jp/' },
         { hid: 'og:title', property: 'og:title', content: '米１グランプリ松江2024｜お米で地方から日本を元気に！' },
         { hid: 'og:description', property: 'og:description', content: 'こだわりのメニューを食べ比べ、来場者の投票でナンバーワンを決める、お祭りのように楽しく、真剣な食イベント！' },
         { hid: 'og:image', property: 'og:image', content: 'https://bei1.jp/images/ogp.jpg' },
